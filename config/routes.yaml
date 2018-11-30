@@ -9,3 +9,6 @@ training_next:
 training_end:
         path: /training/end
         controller: App\Controller\TrainingController::end
+personal:
+        path: /training/end
+        controller: App\Controller\TrainingController::end
