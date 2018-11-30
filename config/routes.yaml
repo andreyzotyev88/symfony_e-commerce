@@ -1,3 +1,11 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+training_start:
+        path: '/training/start'
+        controller: App\Controller\TrainingController::start
+
+training_next:
+        path: /training/next
+        controller: App\Controller\TrainingController::next
+
+training_end:
+        path: /training/end
+        controller: App\Controller\TrainingController::end
