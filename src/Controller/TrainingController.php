@@ -23,6 +23,7 @@ class TrainingController extends AbstractController
 
     public function next()
     {
+
 	return $this->render('training/next.html.twig',[
 	    'controller_name' => 'TrainingController::next',
 	]);
