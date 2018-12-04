@@ -13,6 +13,22 @@ training_end:
 app_login:
         path: /login
         controller: App\Controller\SecurityController::login
+
+#administation sections#
 admin:
         path: /admin
         controller: App\Controller\AdminController::index
+
+admin_table:
+        path: /admin/table/{table_name}
+        controller: App\Controller\AdminController::tableView
+
+admin_table_new:
+        path: /admin/table/{table_name}/new
+        controller: App\Controller\AdminController::tableNew
+
+admin_table_edit:
+        path: /admin/table/{table_name}/edit/{id}
+        controller: App\Controller\AdminController::tableEdit
+        requirements:
+          id: '\d+'
