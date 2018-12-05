@@ -12,25 +12,25 @@
                     <table class="table table-striped table-bordered first">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Login</th>
-                            <th>Group</th>
+                            {% for header in tablesHeader %}
+                            <th> {{ header }}</th>
+                            {% endfor %}
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for row in tablesResult %}
                         <tr>
-                            <td>{{ row.getId }}</td>
-                            <td>{{ row.getUsername }}</td>
-                            <td>New York</td>
-                            <td><a href="{{ path('admin_table_edit',{"id":row.getId,"table_name":"user"}) }}" class="btn btn-primary">Edit</a></td>
+                            {%for value in row.getAllValuesArrays  %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                            <td><a href="{{ path('admin_table_edit',{"id":row.getId,"table_name":tableName}) }}" class="btn btn-primary">Edit</a></td>
                         </tr>
                         {%  endfor %}
                         </tbody>
                     </table>
                 </div><br>
-                <a href="{{ path('admin_table_new',{"table_name":"user"}) }}" class="btn btn-success">Add new</a>
+                <a href="{{ path('admin_table_new',{"table_name":tableName}) }}" class="btn btn-success">Add new</a>
             </div>
         </div>
 {% endblock %}

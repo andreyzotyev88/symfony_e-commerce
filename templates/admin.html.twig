@@ -72,11 +72,14 @@
                             Меню
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Таблицы</a>
-                            <div id="submenu-5" class="collapse submenu" style="">
+                            <a class="nav-link {%  if section_name == "tables" %} active {% endif %}" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Таблицы</a>
+                            <div id="submenu-5" class="collapse submenu {%  if section_name == "tables" %} show {% endif %}"  style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('admin_table', {'table_name':'user'} ) }}">Пользователи</a>
+                                        <a class="nav-link {% if tableName == "news" %} active {% endif %}" href="{{ path('admin_table', {'table_name':'news'} ) }}">News</a>
+                                        <a class="nav-link {% if tableName == "user" %} active {% endif %}" href="{{ path('admin_table', {'table_name':'user'} ) }}">Users</a>
+                                        <a class="nav-link {% if tableName == "product" %} active {% endif %}" href="{{ path('admin_table', {'table_name':'product'} ) }}">Products</a>
+                                        <a class="nav-link {% if tableName == "basket" %} active {% endif %}" href="{{ path('admin_table', {'table_name':'basket'} ) }}">Basket</a>
                                     </li>
                                 </ul>
                             </div>
