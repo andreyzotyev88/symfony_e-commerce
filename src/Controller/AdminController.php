@@ -15,6 +15,8 @@ class AdminController extends AbstractController
 
     public function index()
     {
+        echo "test";
+        die();
         return $this->render('admin/index.html.twig', ["title"=>""
         ]);
     }
@@ -65,6 +67,7 @@ class AdminController extends AbstractController
             $this->addFlash('success','Saved');
             return $this->redirectToRoute('admin_table',array("table_name"=>$table_name));
         }
+
         return $this->render('admin/table.new.html.twig',
             ['add_form' => $form->createView(),'title' => 'Add new element in '.$table_name.' table.' ,"section_name" => "tables","tableName"=>$table_name]);
     }

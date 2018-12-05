@@ -1,18 +1,60 @@
-training_start:
-        path: '/training/start'
-        controller: App\Controller\TrainingController::start
-
-training_next:
-        path: /training/next
-        controller: App\Controller\TrainingController::next
-
-training_end:
-        path: /training/end
-        controller: App\Controller\TrainingController::end
-
-app_login:
+#security sections#
+security_login:
         path: /login
         controller: App\Controller\SecurityController::login
+
+security_register:
+        path: /register
+        controller: App\Controller\SecurityController::register
+
+#personal sections#
+personal:
+      path: /personal
+      controller: App\Controller\PersonalController:index
+
+personal_basket:
+        path: /basket
+        controller: App\Controller\PersonalController:basket
+
+personal_order:
+        path: /order
+        controller: App\Controller\PersonalController:order
+
+#portal sections#
+portal:
+        path: /
+        controller: App\Controller\PortalController::index
+
+portal_contact:
+        path: /contact
+        controller: App\Controller\PortalController::contact
+
+portal_news:
+        path: /news
+        controller: App\Controller\NewsController::news
+
+portal_news_detail:
+        path: /news/{symlink}
+        controller: App\Controller\NewsController::newsDetail
+
+portal_catalog:
+        path: /catalog
+        controller: App\Controller\CatalogController::catalog
+
+portal_catalog_section:
+        path: /catalog/{section}
+        controller: App\Controller\CatalogController::catalogSection
+        requirements:
+          detail: /d+
+          section: /d+
+
+portal_catalog_detail:
+        path: /catalog/{section}/{detail}
+        controller: App\Controller\CatalogController::catalogDetail
+        requirements:
+          detail: /d+
+          section: /d+
+
 
 #administation sections#
 admin:

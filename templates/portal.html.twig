@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopin A Ecommerce Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <link href="{{ asset("portal/css/bootstrap.css")}}" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="{{ asset("portal/css/style.css") }}" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--theme-style-->
+    <link href="{{ asset("portal/css/style4.css") }}" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <script src="{{ asset("portal/js/jquery.min.js") }}"></script>
+    <!--- start-rate---->
+    <script src="{{ asset("portal/js/jstarbox.js") }}"></script>
+    <link rel="stylesheet" href="{{ asset("portal/css/jstarbox.css") }}" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery('.starbox').each(function() {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function(event, value) {
+                    if(starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' '+val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!---//End-rate---->
+
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="col-sm-5 col-md-offset-2  header-login">
+                <ul >
+                    <li><a href="{{ path('security_login') }}">Login</a></li>
+                    <li><a href="{{ path('security_register') }}">Register</a></li>
+                    <li><a href="{{ path('personal') }}">Personal</a></li>
+                    <li><a href="{{ path('admin') }}">Admin sections</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="head-top">
+
+            <div class="col-sm-8 col-md-offset-2 h_menu4">
+                <nav class="navbar nav_bottom" role="navigation">
+                    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                        <ul class="nav navbar-nav nav_1">
+                            <li><a class="color" href="{{ path("portal") }}">Main</a></li>
+                            <li><a class="color" href="{{ path("portal_news") }}">News</a></li>
+                            <li><a class="color" href="{{ path("portal_catalog") }}">Catalog</a></li>
+                            <li><a class="color" href="{{ path("personal_basket") }}">Basket</a></li>
+                            <li><a class="color" href="{{ path("portal_contact") }}">Contact</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+
+                </nav>
+            </div>
+
+            <div class="col-sm-2 search-right">
+                <div class="cart box_1">
+                    <a href="checkout.html">
+                        <h3> <div class="total">
+                                <span class="simpleCart_total"></span>22$</div>
+                            <img src="{{ asset("portal/images/cart.png") }}" alt=""/></h3>
+                    </a>
+                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="banner-top">
+    <div class="container">
+        <h1>{{ h1 }}</h1>
+    </div>
+</div>
+
+</div>
+<!--//content-->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ asset("js/simpleCart.min.js") }}"> </script>
+<!-- slide -->
+<script src="{{ asset("js/bootstrap.min.js") }}"> </script>
+<!--light-box-files -->
+<script src="{{ asset("js/jquery.chocolat.js") }}"></script>
+<link rel="stylesheet" href="{{ asset("css/chocolat.css") }}" type="text/css" media="screen" charset="utf-8">
+<!--light-box-files -->
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        $('a.picture').Chocolat();
+    });
+</script>
+
+
+</body>
+</html>
