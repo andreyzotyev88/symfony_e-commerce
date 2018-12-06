@@ -2,28 +2,14 @@
 {% block body %}
     <div class="container">
         <div class="col-md-12 contact-top">
-            <h3>Want to work with me?</h3>
-            <form>
-                <div>
-                    <span>Your Name </span>
-                    <input type="text" value="">
+            <h3>Write me please!!!</h3>
+            {% if(formSend == true) %}
+                <div class="alert alert-success" role="alert">
+                    <strong>SEND SEND SEND</strong>
                 </div>
-                <div>
-                    <span>Your Email </span>
-                    <input type="text" value="">
-                </div>
-                <div>
-                    <span>Subject</span>
-                    <input type="text" value="">
-                </div>
-                <div>
-                    <span>Your Message</span>
-                    <textarea> </textarea>
-                </div>
-                <label class="hvr-skew-backward">
-                    <input type="submit" value="Send">
-                </label>
-            </form>
+            {% else %}
+                {{ form(formFeedback) }}
+            {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>

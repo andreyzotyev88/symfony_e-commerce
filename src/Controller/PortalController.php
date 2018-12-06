@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 
 class PortalController extends AbstractController
 {
@@ -15,11 +16,26 @@ class PortalController extends AbstractController
         ]);
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
+        $formSend = false;
+        $form = $this->createForm('App\Form\FeedbackType');
+        $form->add('submit',SubmitType::class)
+            ->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $feedback = $form->getData();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($feedback);
+            $manager->flush();
+            $this->addFlash('success','Saved');
+            $formSend = true;
+        }
         return $this->render('portal/contact.html.twig', [
-            'h1'=>'Contact'
-        ]);    }
+            'h1'=>'Contact',
+            'formFeedback'=>$form->createView(),
+            'formSend'=>$formSend
+        ]);
+    }
 
 
 
