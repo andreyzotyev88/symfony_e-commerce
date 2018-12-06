@@ -19,25 +19,39 @@ class NewsRepository extends ServiceEntityRepository
         parent::__construct($registry, News::class);
     }
 
-    // /**
-    //  * @return News[] Returns an array of News objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllForCurPage($max_results,$number_page)
     {
+        $totalOffset = ($number_page-1)*$max_results;
         return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('n.active = :val')
+            ->setParameter('val', '1')
+            ->orderBy('n.date_create', 'ASC')
+            ->setFirstResult($totalOffset)
+            ->setMaxResults($max_results)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
+    public function countElement(){
+        return $this->createQueryBuilder('n')
+            ->select('count(n)')
+            ->andWhere('n.active = :val')
+            ->setParameter('val','1')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getBySymlink($symlink){
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.symlink = :sym')
+            ->setParameter('sym',$symlink)
+            ->getQuery()
+            ->getSingleResult();
+    }
     /*
-    public function findOneBySomeField($value): ?News
+    public function findOneByvalSomeField($value): ?News
     {
         return $this->createQueryBuilder('n')
             ->andWhere('n.exampleField = :val')

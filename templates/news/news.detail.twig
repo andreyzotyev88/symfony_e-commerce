@@ -1,4 +1,9 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
-
+<div class="grid_3 grid_4">
+    <div class="col-md-12 contact-left">
+        {{ newsObject.description }}
+    </div><br>
+    <a href="{{ path('portal_news',{"page":1}) }}" class="btn btn-lg btn-default"> Back to List</a>
+</div>
 {% endblock %}

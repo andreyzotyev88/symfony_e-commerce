@@ -30,8 +30,13 @@ portal_contact:
         controller: App\Controller\PortalController::contact
 
 portal_news:
-        path: /news
+        path: /news/{page}
         controller: App\Controller\NewsController::news
+        defaults:
+              page: 1
+        requirements:
+              page: \d+
+
 
 portal_news_detail:
         path: /news/{symlink}
@@ -45,15 +50,15 @@ portal_catalog_section:
         path: /catalog/{section}
         controller: App\Controller\CatalogController::catalogSection
         requirements:
-          detail: /d+
-          section: /d+
+          detail: \d+
+          section: \d+
 
 portal_catalog_detail:
         path: /catalog/{section}/{detail}
         controller: App\Controller\CatalogController::catalogDetail
         requirements:
-          detail: /d+
-          section: /d+
+          detail: \d+
+          section: \d+
 
 
 #administation sections#

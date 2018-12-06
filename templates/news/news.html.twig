@@ -1,4 +1,17 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
-
+    <div class="grid_3 grid_4">
+        {% for object in news_array %}
+        <div  style="border-bottom:1px solid grey; padding-bottom:5px; padding-top:5px;" class="col-md-12 contact-left">
+            <h3>{{ object.title }}</h3>
+            <p>{{ object.description }}</p>
+              <a href="{{ path('portal_news_detail',{"symlink":object.symlink}) }}">More informations</a><br><br>
+        </div>
+        {% endfor %}
+        <div style="margin:10px 0px; clear:both;">
+            {% for  i in 1..totalPageNumber %}
+            <a href="{{ path('portal_news',{"page":i}) }}" class="{% if i == currentPage %}active{% endif %} btn btn-lg btn-default">{{ i }}</a>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

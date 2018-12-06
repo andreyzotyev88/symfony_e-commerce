@@ -24,7 +24,7 @@
                             {%for value in row.getAllValuesArrays  %}
                                 <td>{{ value }}</td>
                             {% endfor %}
-                            <td><a href="{{ path('admin_table_edit',{"id":row.getId,"table_name":tableName}) }}" class="btn btn-primary">Edit</a></td>
+                            <td><a href="{{ path('admin_table_edit',{"id":row.getId,"table_name":tableName}) }}" class=" btn btn-primary">Edit</a></td>
                         </tr>
                         {%  endfor %}
                         </tbody>

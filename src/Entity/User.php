@@ -35,6 +35,21 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fio;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,12 +125,54 @@ class User implements UserInterface
     public function getAllValuesArrays(){
         $return[] = $this->getId();
         $return[] = $this->getUsername();
+        $return[] = $this->getFio();
+        $return[] = $this->getEmail();
+        $return[] = $this->getPhone();
         return $return;
     }
 
     public function getAllNameValuesArrays(){
         $return[] = "Id";
         $return[] = "Name";
+        $return[] = "FIO";
+        $return[] = "email";
+        $return[] = "phone";
         return $return;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getFio(): ?string
+    {
+        return $this->fio;
+    }
+
+    public function setFio(?string $fio): self
+    {
+        $this->fio = $fio;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
     }
 }

@@ -1,4 +1,30 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
-
+    <div class="container">
+        <div class="col-md-12 contact-top">
+            <h3>Want to work with me?</h3>
+            <form>
+                <div>
+                    <span>Your Name </span>
+                    <input type="text" value="">
+                </div>
+                <div>
+                    <span>Your Email </span>
+                    <input type="text" value="">
+                </div>
+                <div>
+                    <span>Subject</span>
+                    <input type="text" value="">
+                </div>
+                <div>
+                    <span>Your Message</span>
+                    <textarea> </textarea>
+                </div>
+                <label class="hvr-skew-backward">
+                    <input type="submit" value="Send">
+                </label>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 {% endblock %}
