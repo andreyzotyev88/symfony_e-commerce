@@ -1,5 +1,5 @@
 #security sections#
-security_login:
+app_login:
         path: /login
         controller: App\Controller\SecurityController::login
 
@@ -69,6 +69,8 @@ admin:
 admin_table:
         path: /admin/table/{table_name}
         controller: App\Controller\AdminController::tableView
+        defaults:
+            table_name: "news"
 
 admin_table_new:
         path: /admin/table/{table_name}/new
