@@ -47,18 +47,16 @@ portal_catalog:
         controller: App\Controller\CatalogController::catalog
 
 portal_catalog_section:
-        path: /catalog/{section}
+        path: /catalog/{section}/{page}
         controller: App\Controller\CatalogController::catalogSection
         requirements:
-          detail: \d+
-          section: \d+
+          page: \d+
+        defaults:
+          page: 1
 
 portal_catalog_detail:
-        path: /catalog/{section}/{detail}
+        path: /catalog/{section}/{product}
         controller: App\Controller\CatalogController::catalogDetail
-        requirements:
-          detail: \d+
-          section: \d+
 
 
 #administation sections#

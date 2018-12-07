@@ -31,6 +31,17 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $symlink;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,5 +97,29 @@ class Product
         $return[] = "Description";
         $return[] = "Price";
         return $return;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSymlink(): ?string
+    {
+        return $this->symlink;
+    }
+
+    public function setSymlink(string $symlink): self
+    {
+        $this->symlink = $symlink;
+
+        return $this;
     }
 }

@@ -1,4 +1,20 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
+<div class="grid_3 grid_4">
+    <div class="page-header">
+        <h3>Section list</h3>
+    </div>
+    <div class="col-md-3 product-bottom">
+        <!--categories-->
+        <div class=" rsidebar span_1_of_left">
+            <ul class="menu-drop">
+                {% for category in categoriesList %}
+                    <li class="item2"><a href="{{ path("portal_catalog_section",{"section":category.symlink}) }}"><h3 class="panel-title">{{ category.title }}</h3></a>
 
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

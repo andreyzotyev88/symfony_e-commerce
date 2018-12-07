@@ -19,6 +19,29 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function countElement($sectionSymlink){
+        return $this->createQueryBuilder('p')
+            ->addSelect('count(p) as count')
+            ->leftJoin('p.category','c')
+            ->addSelect('c')
+            ->where('c.symlink = :symlink')
+            ->setParameter('symlink',$sectionSymlink)
+            ->getQuery()
+            ->getScalarResult();
+    }
+
+    public function findAllProductBySectionSymlinkWithOffset($sectionSymlink,$offset,$limit){
+        return $this
+            ->createQueryBuilder('p')
+            ->leftJoin('p.category','c')
+            ->addSelect('c')
+            ->where('c.symlink = :symlink')
+            ->setParameter('symlink',$sectionSymlink)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
