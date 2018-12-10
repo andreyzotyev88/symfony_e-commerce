@@ -2,6 +2,8 @@
 app_login:
         path: /login
         controller: App\Controller\SecurityController::login
+app_logout:
+        path: /logout
 
 security_register:
         path: /register
@@ -13,7 +15,7 @@ personal:
       controller: App\Controller\PersonalController:index
 
 personal_basket:
-        path: /basket
+        path: /personal/basket
         controller: App\Controller\PersonalController:basket
 
 personal_order:

@@ -1,4 +1,40 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
-
+    <div class="page-header">
+        <h3>Basket</h3>
+    </div>
+    {% if(basket) %}
+    <div class="bs-example" data-example-id="simple-table">
+        <table class="table">
+            <caption>Your products:</caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in basket %}
+            <tr>
+                <td>{{ row.product.name }}</td>
+                <td>{{ row.product.description }}</td>
+                <td>{{ row.product.price }}</td>
+                <td>
+                    <form action="{{ path('personal_basket') }}" method="POST">
+                        <input type="hidden" name="id_delete" value="{{ row.id }}">
+                        <input value="Удалить из корзины" type="submit" class="add-to item_add hvr-skew-backward">
+                     </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            No product in basket
+        </div>
+    {% endif %}
 {% endblock %}

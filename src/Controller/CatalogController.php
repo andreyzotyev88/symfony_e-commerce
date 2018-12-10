@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Basket;
 use App\Entity\News;
 use App\Entity\Product;
 use App\Entity\Category;
@@ -21,10 +22,41 @@ class CatalogController extends AbstractController
             'categoriesList'=>$categories
         ]);
     }
-    public function catalogDetail($product)
+    public function catalogDetail(Request $request,$section,$product)
     {
-        echo $product;
-        die();
+        $categories = $this
+            ->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+        $product = $this
+            ->getDoctrine()
+            ->getRepository(Product::class)
+            ->findOneBy(["symlink"=>$product]);
+        $basket = $this
+            ->getDoctrine()
+            ->getRepository(Basket::class)
+            ->findOneBy(["user"=>$this->getUser(),"product"=>$product]);
+        $manager = $this
+            ->getDoctrine()
+            ->getManager();
+        if ($request->request->get('symlink_product_add')){
+            $user = $this->getUser();
+            $basket = new Basket();
+            $basket->setUser($user);
+            $basket->setProduct($product);
+            $manager->persist($basket);
+        }else if ($request->request->get('id_delete')){
+            $manager->remove($basket);
+            $basket = false;
+        }
+        $manager->flush();
+        return $this->render('catalog/catalog.detail.html.twig',[
+            'h1'=>$product->getName(),
+            'categoriesList'=>$categories,
+            'product'=>$product,
+            'section'=>$section,
+            'basket'=>$basket
+        ]);
     }
 
     public function catalogSection(Request $request,$section,$page)

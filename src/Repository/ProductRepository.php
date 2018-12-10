@@ -40,7 +40,7 @@ class ProductRepository extends ServiceEntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
     // /**
     //  * @return Product[] Returns an array of Product objects
