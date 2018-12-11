@@ -41,7 +41,7 @@ class Basket
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getUser()
     {
         return $this->user;
     }
@@ -53,7 +53,7 @@ class Basket
         return $this;
     }
 
-    public function getProduct(): ?Product
+    public function getProduct()
     {
         return $this->product;
     }
@@ -99,5 +99,25 @@ class Basket
         }
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllValuesArrays(){
+        $return[] = $this->getId();
+        $return[] = $this->getUser()->getUsername();
+        $return[] = $this->getProduct()->getName();
+        return $return;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllNameValuesArrays(){
+        $return[] = "Id";
+        $return[] = "User";
+        $return[] = "Product";
+        return $return;
     }
 }

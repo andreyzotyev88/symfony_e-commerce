@@ -25,9 +25,10 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Roles")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string The hashed password
@@ -77,18 +78,13 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
+        $role = $this->roles;
+        if($role) {
+            $roles[] = $role->getName();
+            return array_unique($roles);
+        }else{
+            return array_unique(["ROLE_USER"]);
+        }
     }
 
     /**
@@ -128,7 +124,16 @@ class User implements UserInterface
         $return[] = $this->getFio();
         $return[] = $this->getEmail();
         $return[] = $this->getPhone();
+        $return[] = $this->getRolesEntity();
         return $return;
+    }
+
+    public function getRolesEntity(): string {
+        if($this->roles) {
+            return $this->roles->getName();
+        }else{
+            return "ROLE_USER";
+        }
     }
 
     public function getAllNameValuesArrays(){
@@ -137,6 +142,7 @@ class User implements UserInterface
         $return[] = "FIO";
         $return[] = "email";
         $return[] = "phone";
+        $return[] = "role";
         return $return;
     }
 
@@ -172,6 +178,13 @@ class User implements UserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function setRoles(?Roles $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

@@ -30,6 +30,14 @@ class ProductRepository extends ServiceEntityRepository
             ->getScalarResult();
     }
 
+    public function findFewProduct($maxCount)
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults($maxCount)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findAllProductBySectionSymlinkWithOffset($sectionSymlink,$offset,$limit){
         return $this
             ->createQueryBuilder('p')
@@ -40,7 +48,7 @@ class ProductRepository extends ServiceEntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getResult();
     }
     // /**
     //  * @return Product[] Returns an array of Product objects

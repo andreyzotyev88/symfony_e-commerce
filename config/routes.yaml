@@ -5,22 +5,14 @@ app_login:
 app_logout:
         path: /logout
 
-security_register:
+app_register:
         path: /register
         controller: App\Controller\SecurityController::register
 
 #personal sections#
-personal:
-      path: /personal
-      controller: App\Controller\PersonalController:index
-
 personal_basket:
         path: /personal/basket
         controller: App\Controller\PersonalController:basket
-
-personal_order:
-        path: /order
-        controller: App\Controller\PersonalController:order
 
 #portal sections#
 portal:
@@ -62,10 +54,6 @@ portal_catalog_detail:
 
 
 #administation sections#
-admin:
-        path: /admin
-        controller: App\Controller\AdminController::index
-
 admin_table:
         path: /admin/table/{table_name}
         controller: App\Controller\AdminController::tableView

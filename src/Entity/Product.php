@@ -88,6 +88,7 @@ class Product
         $return[] = $this->getName();
         $return[] = $this->getDescription();
         $return[] = $this->getPrice();
+        $return[] = $this->getCategoryTitle();
         return $return;
     }
 
@@ -96,6 +97,7 @@ class Product
         $return[] = "Name";
         $return[] = "Description";
         $return[] = "Price";
+        $return[] = "Category";
         return $return;
     }
 
@@ -103,6 +105,12 @@ class Product
     {
         return $this->category;
     }
+
+    public function getCategoryTitle()
+    {
+        return $this->category->getTitle();
+    }
+
 
     public function setCategory(?Category $category): self
     {

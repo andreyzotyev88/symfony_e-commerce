@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Roles;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,8 +22,9 @@ class UserType extends AbstractType
             ->add('username',TextType::class)
             ->add('password',RepeatedType::class,array(
                 'type' => PasswordType::class,
+                'required'=>true,
                 'first_options' => array('label'=>'Password'),
-                'second_options' => array('label' => 'Repeat Password')
+                'second_options' => array('label' => 'Repeat Password'),
             ))
             ->add('email',EmailType::class)
             ->add('fio',TextType::class)

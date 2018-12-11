@@ -34,6 +34,16 @@ class NewsRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findFewNews($maxCount)
+    {
+        return $this->createQueryBuilder('n')
+            ->setMaxResults($maxCount)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     public function countElement(){
         return $this->createQueryBuilder('n')
             ->select('count(n)')

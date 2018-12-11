@@ -1,4 +1,59 @@
 {% extends 'portal.html.twig' %}
 {% block body %}
+    <div class="container">
+        <div class="content-top" style="
+    padding-top: 0px;
+">
+            <div class="col-md-12 col-md">
 
+                <div class="col-2">
+                    <span>News</span>
+                    {% for article in news %}
+                        <h2><a style="font-size:16px;" href="single.html">{{ article.title }}</a></h2>
+                        <p>
+                            {% if article.description|length > 155 %}
+
+                                {{ article.description|slice(0, 155) ~ '...' }}
+
+                            {% endif %}
+                        </p>
+                        <a href="{{ path('portal_news_detail',{'symlink':article.symlink}) }}" class="buy-now">Read more</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <!--products-->
+        <div class="content-mid">
+            <h3>Trending Items</h3>
+            <label class="line"></label>
+            <div class="mid-popular">
+                {% for product in products %}
+                <div class="col-md-3 item-grid simpleCart_shelfItem">
+                    <div class=" mid-pop">
+                        <div class="pro-img">
+                            <img src="{{ asset('portal/images/pc.jpg') }}" class="img-responsive" alt="">
+                        </div>
+                        <div class="mid-1">
+                            <div class="women">
+                                <div class="women-top">
+                                    <span>{{ product.category.title }}</span>
+                                    <h6><a href="{{ path('portal_catalog_detail',{'product':product.symlink,'section':product.category.symlink}) }}">{{ product.name }}</a></h6>
+                                </div>
+                                <div class="img item_add">
+                                    <a href="#"><img src="images/ca.png" alt=""></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="mid-2">
+                                <p><em class="item_price">{{ product.price }} руб.</em></p>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    </div>
 {% endblock %}

@@ -62,4 +62,18 @@ class Category
         return $this;
     }
 
+    public function getAllValuesArrays(){
+        $return[] = $this->getId();
+        $return[] = $this->getTitle();
+        $return[] = $this->getSymlink();
+        return $return;
+    }
+
+    public function getAllNameValuesArrays(){
+        $return[] = "Id";
+        $return[] = "Title";
+        $return[] = "Symlink";
+        return $return;
+    }
+
 }

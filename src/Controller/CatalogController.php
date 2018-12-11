@@ -67,10 +67,9 @@ class CatalogController extends AbstractController
             ->getDoctrine()
             ->getRepository(Category::class)
             ->findAll();
-       $products = $this->getDoctrine()
+        $products = $this->getDoctrine()
            ->getRepository(Product::class)
            ->findAllProductBySectionSymlinkWithOffset($section,$offset,$productOnPage);
-
        $totalElement = $this->getDoctrine()
            ->getRepository(Product::class)
            ->countElement($section)[0]['count'];

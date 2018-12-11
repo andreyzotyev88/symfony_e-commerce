@@ -35,11 +35,4 @@ class PersonalController extends AbstractController
             'basket' => $basket
         ]);
     }
-
-    public function order()
-    {
-        return $this->render('personal/order.html.twig', [
-            'h1' => 'Order',
-        ]);
-    }
 }
