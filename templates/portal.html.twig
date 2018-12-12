@@ -60,12 +60,12 @@
             <div class="col-sm-2 search-right">
                 {% if(is_granted('ROLE_USER')) %}
                 <div class="cart box_1">
-                    <a href="checkout.html">
+                    <a href="{{ path('personal_basket') }}">
                         <h3> <div class="total">
-                                <span class="simpleCart_total"></span>22$</div>
+                                <span class="simpleCart_total"></span>    {{ basket_total_price()|format_price_rub}}
+                            </div>
                             <img src="{{ asset("portal/images/cart.png") }}" alt=""/></h3>
                     </a>
-                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
 
                 </div>
                 {% endif %}

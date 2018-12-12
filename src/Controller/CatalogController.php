@@ -45,7 +45,7 @@ class CatalogController extends AbstractController
             $basket->setUser($user);
             $basket->setProduct($product);
             $manager->persist($basket);
-        }else if ($request->request->get('id_delete')){
+        }else if ($request->request->get('symlink_product_delete')){
             $manager->remove($basket);
             $basket = false;
         }
