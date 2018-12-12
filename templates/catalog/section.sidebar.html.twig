@@ -1,0 +1,12 @@
+<div class=" rsidebar span_1_of_left">
+    <h4 class="cate">Categories</h4>
+    <ul class="menu-drop">
+        {% for category in categoriesList %}
+            <li class="item2">
+                <a href="{{ path("portal_catalog_section",{"section":category.symlink}) }}">
+                    <h3 class="panel-title">{{ category.title }}</h3>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
