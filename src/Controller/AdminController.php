@@ -2,48 +2,44 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Roles;
+use App\Service\StringConvertor;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
-    public function tableView(Request $request,$table_name)
+    public function tableView(Request $request,StringConvertor $stringConvertor,$table_name)
     {
         $tablesResult = $this
             ->getDoctrine()
-            ->getRepository('App\Entity\\'.strtoupper(substr($table_name,0,1)).strtolower(substr($table_name,1)))
+            ->getRepository($stringConvertor->tableNameToFullPath("App","Entity",$table_name))
             ->findAll();
+        $empty = false;
+        $tablesHeader = false;
         if(empty($tablesResult)){
-            return $this->render('admin/table.view.html.twig', [
-                "empty" => $table_name,
-                "section_name" => "tables",
-                "tableName"=>$table_name,
-                "title"=> ucfirst(strtoupper($table_name)),
-            ]);
+            $empty = $table_name;
         }else{
             $tablesHeader = $tablesResult[0]->getAllNameValuesArrays();
-            return $this->render('admin/table.view.html.twig', [
-                "empty" => false,
-                "title"=> ucfirst(strtoupper($table_name)),
-                "tablesResult"=>$tablesResult,
-                "tablesHeader"=>$tablesHeader,
-                "tableName"=>$table_name,
-                "section_name" => "tables",
-            ]);
         }
+        return $this->render('admin/table.view.html.twig', [
+            "empty" => false,
+            "title"=> ucfirst(strtoupper($table_name)),
+            "tablesResult"=>$tablesResult,
+            "tablesHeader"=>$tablesHeader,
+            "tableName"=>$table_name,
+            "section_name" => "tables",
+            "empty" => $empty
+        ]);
     }
 
-    public function tableEdit(Request $request,$table_name,$id){
-        echo 'App\Entity\\'.strtoupper(substr($table_name,"0","1")).substr($table_name,"1");
+    public function tableEdit(Request $request,StringConvertor $stringConvertor,$table_name,$id){
         $object = $this->getDoctrine()
-            ->getRepository('App\Entity\\'.strtoupper(substr($table_name,"0","1")).substr($table_name,"1"))
+            ->getRepository($stringConvertor->tableNameToFullPath("App","Entity",$table_name))
             ->find($id);
-        $form = $this->createForm('App\Form\\'.strtoupper(substr($table_name,"0","1")).substr($table_name,"1").'Type',$object);
+        $form = $this->createForm($stringConvertor->tableNameToFullPath("App","Form",$table_name,"Type"),$object);
         $form->add('submit',SubmitType::class);
         if($table_name == "user"){
             $form->add('roles',EntityType::class,[
@@ -60,12 +56,16 @@ class AdminController extends AbstractController
             $this->addFlash('success','Saved');
             return $this->redirectToRoute('admin_table',array("table_name"=>$table_name));
         }
-        return $this->render('admin/table.new.html.twig',
-            ['add_form' => $form->createView(),'title' => 'Add new element in '.$table_name.' table.' , "section_name" => "tables","tableName"=>$table_name]);
+        return $this->render('admin/table.new.html.twig', [
+            'add_form' => $form->createView(),
+            'title' => 'Add new element in '.$table_name.' table.' ,
+            'section_name' => "tables"
+            ,"tableName"=>$table_name
+        ]);
     }
 
-    public function tableNew(Request $request,$table_name){
-        $form = $this->createForm('App\Form\\'.strtoupper(substr($table_name,"0","1")).substr($table_name,"1").'Type');
+    public function tableNew(Request $request,StringConvertor $stringConvertor,$table_name){
+        $form = $this->createForm($stringConvertor->tableNameToFullPath("App","Form",$table_name,"Type"));
         $form->add('submit',SubmitType::class);
         if($table_name == "user"){
             $form->add('roles',EntityType::class,[
@@ -83,8 +83,11 @@ class AdminController extends AbstractController
             $this->addFlash('success','Saved');
             return $this->redirectToRoute('admin_table',array("table_name"=>$table_name));
         }
-
-        return $this->render('admin/table.new.html.twig',
-            ['add_form' => $form->createView(),'title' => 'Add new element in '.$table_name.' table.' ,"section_name" => "tables","tableName"=>$table_name]);
+        return $this->render('admin/table.new.html.twig', [
+            'add_form' => $form->createView(),
+            'title' => 'Add new element in '.$table_name.' table.',
+            "section_name" => "tables",
+            "tableName"=>$table_name
+        ]);
     }
 }
